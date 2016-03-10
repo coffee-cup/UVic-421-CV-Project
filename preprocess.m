@@ -11,9 +11,9 @@ function [ ima_out ] = preprocess( ima_in )
     ima_gray = rgb2gray(ima_crop);
     
     % Sharpen with unsharp mask
-    %ima_sharpen = imsharpen(ima_gray, 'Radius', 1, 'Amount', 1);
+    ima_sharpen = imsharpen(ima_gray, 'Radius', 1, 'Amount', 1);
     
-    ima_out = ima_gray;
+    ima_out = ima_sharpen;
     
 end
 
