@@ -5,7 +5,7 @@ function [ ima_out ] = segment( ima_in )
     E = EdgeImage(ima_in);
     
     NUM_SNAKES = 1;
-    NUM_POINTS_IN_SNAKE = 3;
+    NUM_POINTS_IN_SNAKE = 5;
     
     imshow(E);
     
@@ -31,6 +31,8 @@ function [ ima_out ] = segment( ima_in )
         %   plot(snake(j,1), snake(j,2), '-x');
         %end
     end
+    
+    MoveSnakes(ima_in, snakes);
     
     ima_out = E;
 

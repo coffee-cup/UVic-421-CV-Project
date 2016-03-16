@@ -1,6 +1,8 @@
 close all; % closes all figures
 
-video = VideoReader('small_2.avi');
+video = 'small_2.avi';
+image = 'DRAGONFISHSUBC13112_20140920T100103.000Z_27.png';
+video = VideoReader(video);
 
 cur_frame = 1;
 % Loops through image frames
@@ -8,6 +10,7 @@ while hasFrame(video)
    str = sprintf('Original Image | time: %f | frame: %d', video.CurrentTime, cur_frame);
    frame = readFrame(video);
    
+%    frame = imread(image);
    %figure;
    %imshow(frame);
    %title(str);
