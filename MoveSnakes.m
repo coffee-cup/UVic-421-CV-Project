@@ -1,6 +1,6 @@
 function [ moved_snakes ] = MoveSnakes( img, snakes )
 %MOVESNAKE Moves snakes to minimize energy
-%   Returns list of new snake 
+%   Returns list of new snake points
 
     [num_points_snake, dim, num_snakes] = size(snakes);
     

@@ -32,7 +32,17 @@ function [ ima_out ] = segment( ima_in )
         %end
     end
     
-    MoveSnakes(ima_in, snakes);
+    %MoveSnakes(ima_in, snakes);
+    
+    m = zeros(size(E,1),size(E,2));
+    m(min(y):max(y), min(x):max(x)) = 1;
+    
+    figure; imshow(m);
+    
+    binary = uint8(E < 210);
+    seg = region_seg(E, m, 300, 0.001); %-- Run segmentation
+
+    figure; imshow(seg); title('Global Region-Based Segmentation');
     
     ima_out = E;
 
