@@ -2,12 +2,10 @@ function [ ima_out ] = segment( ima_in )
 %PROCESS Segments pods using active contours
 %   Detailed explanation goes here
     
-    E = EdgeImage(ima_in);
-    
     NUM_SNAKES = 1;
     NUM_POINTS_IN_SNAKE = 5;
     
-    imshow(E);
+    imshow(ima_in);
     
     snakes = zeros(NUM_POINTS_IN_SNAKE, 2, NUM_SNAKES);
     % Get points for each snake 
@@ -35,19 +33,25 @@ function [ ima_out ] = segment( ima_in )
     %MoveSnakes(ima_in, snakes);
     
     % Make box
-    m = zeros(size(E,1),size(E,2));
+    m = zeros(size(ima_in,1),size(ima_in,2));
     m(min(y):max(y), min(x):max(x)) = 1;
-    m(min(y)+100:max(y)+100, min(x)+100:max(x)+100) = 1;
+    %m(min(y)+100:max(y)+100, min(x)+100:max(x)+100) = 1;
     
     % Show box
     figure; imshow(m);
     
     %-- Run segmentation
-    seg = region_seg(E, m, 300, 0.001);
+    seg = region_seg(ima_in, m, 300, 0.001);
 
     figure; imshow(seg); title('Global Region-Based Segmentation');
     
-    ima_out = E;
+    %Identify Number of Copepods found
+    temp = bwconncomp(seg,4);
+    copepods = temp.NumObjects;
+    copepods
+    
+    
+    ima_out = seg;
 
 end
 

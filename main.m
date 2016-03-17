@@ -1,4 +1,4 @@
-close all; % closes all figures
+%close all; % closes all figures
 
 video = 'small_2.avi';
 image = 'DRAGONFISHSUBC13112_20140920T100103.000Z_27.png';
@@ -14,8 +14,7 @@ while hasFrame(video)
    %figure;
    %imshow(frame);
    %title(str);
-   
-   ima_pre = preprocess(frame);
+  
    
    %figure;
    %imshow(ima_pre);
