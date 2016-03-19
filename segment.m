@@ -5,53 +5,73 @@ function [ ima_out ] = segment( ima_in )
     NUM_SNAKES = 1;
     NUM_POINTS_IN_SNAKE = 5;
     
-    imshow(ima_in);
+    %figure; imshow(ima_in);
     
     snakes = zeros(NUM_POINTS_IN_SNAKE, 2, NUM_SNAKES);
     % Get points for each snake 
-    for i=1:NUM_SNAKES
-        title(sprintf('Enter %d points for snake %d', NUM_POINTS_IN_SNAKE, i));
-        [x y] = getpts;
-        snakes(:,:,i) = [x y];
-    end
+%     for i=1:NUM_SNAKES
+%         title(sprintf('Enter %d points for snake %d', NUM_POINTS_IN_SNAKE, i));
+%         [x y] = getpts;
+%         snakes(:,:,i) = [x y];
+%     end
     
     % Plot points on image
-    title('snakes');
-    for i=1:NUM_SNAKES
-        % Loop through points in snake
-        hold on;
-        snake = snakes(:,:,i);
-        x = snake(:,1);
-        y = snake(:,2);
-        scatter(x, y);
-        line(x, y);
-        %for j=1:NUM_POINTS_IN_SNAKE
-        %   plot(snake(j,1), snake(j,2), '-x');
-        %end
-    end
+%     title('snakes');
+%     for i=1:NUM_SNAKES
+%         % Loop through points in snake
+%         hold on;
+%         snake = snakes(:,:,i);
+%         x = snake(:,1);
+%         y = snake(:,2);
+%         scatter(x, y);
+%         line(x, y);
+%     end
     
     %MoveSnakes(ima_in, snakes);
     
     % Make box
-    m = zeros(size(ima_in,1),size(ima_in,2));
-    m(min(y):max(y), min(x):max(x)) = 1;
-    %m(min(y)+100:max(y)+100, min(x)+100:max(x)+100) = 1;
+    %m = zeros(size(ima_in,1),size(ima_in,2));
+    %m(min(y):max(y), min(x):max(x)) = 1;
     
     % Show box
-    figure; imshow(m);
+%     figure; imshow(m);
     
     %-- Run segmentation
-    seg = region_seg(ima_in, m, 300, 0.001);
+%     seg = region_seg(ima_in, m, 200, 0.001);
 
-    figure; imshow(seg); title('Global Region-Based Segmentation');
+%     figure; imshow(seg); title('Global Region-Based Segmentation');
+    
+    threshValue = graythresh(ima_in);
+    I = ima_in < (255 * threshValue);
+    figure; imshow(I); title(sprintf('Image thresholded at %d', threshValue))
+    
+    CC = bwconncomp(I, 4);
+    [labeledImage, numberOfBlobs] = bwlabel(I);
+    measurments = regionprops(labeledImage);
+    contours = zeros(size(ima_in, 1), size(ima_in, 2));
+%     figure;
+    contours = activecontour(ima_in, imdilate(I, ones(3)), 200, 'Chan-Vese');
+%     for blob=1:numberOfBlobs
+%         thisBlob = ismember(labeledImage, blob);
+% %         figure; imshow(thisBlob);
+%         disp(sprintf('Contour %d / %d', blob, numberOfBlobs));
+%         contours = contours + activecontour(ima_in, imdilate(thisBlob, ones(3)), 200, 'Chan-Vese', 'SMOOTHFACTOR', 0.5);
+%         figure(4); imshow(contours);
+%     end
+    
+    %figure; imshow(contours); title('CONTOURS!!!!!!!!!!!');
     
     %Identify Number of Copepods found
-    temp = bwconncomp(seg,4);
+    temp = bwconncomp(contours,4);
     copepods = temp.NumObjects;
     copepods
     
     
-    ima_out = seg;
+%     [labeledImage, numberOfBlobs] = bwlabel(temp)
+    
+    figure; imshow(ima_in .* uint8(contours)); title('Mask Over Image');
+    ima_out = contours;
+%     ima_out = seg;
 
 end
 
