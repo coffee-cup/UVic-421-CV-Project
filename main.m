@@ -1,6 +1,6 @@
 close all; % closes all figures
 
-video = 'small_2.avi';
+video = 'good_video.mp4';
 image = 'test_105.png';
 video = VideoReader(video);
 
@@ -27,11 +27,17 @@ while hasFrame(video)
    imshow(ima_seg);
    title('Image After Segmentation');
    
-   [frame_objects, positions, count] = label(ima_seg, ima_pre);
-   
-   frame_objects;
-   positions(1:count,:)
+   [frame_objects, frame_positions, frame_count] = label(ima_seg, ima_pre);
     
+   % First frame, set global data as frame data
+   if cur_frame == 1
+       global_objects = frame_objects;
+       global_positions = frame_positions;
+       global_count = frame_count;
+   else
+       
+   end
+   
    break;
    cur_frame = cur_frame + 1;
 end

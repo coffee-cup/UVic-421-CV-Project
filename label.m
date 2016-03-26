@@ -3,9 +3,9 @@ function [ objects, positions, count ] = label( CC_mask, I )
 %segmentation. Does not track
 %   CC_mask: connected component mask after segmentation
 
-[r,c] = size(I);
-objects = repmat(CreateCopepod('empty', [0 0]), r, c);
-positions = zeros(10000, 2);
+[r, c] = size(I);
+objects = repmat(CreateCopepod('empty', [0 0]), 10000, 1);
+positions = zeros(10000, 3);
 m_label = bwlabel(CC_mask, 4); % label with 4 connectivity
 
 [labeledImage, numberOfBlobs] = bwlabel(CC_mask);
@@ -33,12 +33,16 @@ count = numberOfBlobs;
      %disp(sprintf('Label %d / %d, Area: %d', blob, numberOfBlobs, area));
      
      hold on;
-     if area > 200
+     if area > 144
+         % To big to be a copepod
          plot(center(2), center(1), 'b*');
      else
+        % Detected a copepod
         copepod = CreateCopepod(vals(1), center);
-        objects(center(1), center(2)) = copepod;
-        positions(blob, :) = center;
+        
+        % Add detected copepod object to objects array at label index
+        objects(vals(1)) = copepod;
+        positions(blob, :, :) = [center(1), center(2), vals(1)];
         plot(center(2), center(1), 'ro'); 
      end
  end
