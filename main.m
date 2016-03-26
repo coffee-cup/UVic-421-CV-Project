@@ -8,9 +8,9 @@ cur_frame = 1;
 % Loops through image frames
 while hasFrame(video)
    str = sprintf('Original Image | time: %f | frame: %d', video.CurrentTime, cur_frame);
-%   frame = readFrame(video);
+   frame = readFrame(video);
    
-    frame = imread(image);
+   % frame = imread(image);
    figure;
    imshow(frame);
    title(str);
@@ -26,7 +26,11 @@ while hasFrame(video)
    figure;
    imshow(ima_seg);
    title('Image After Segmentation');
+   
+   frame_objects = label(ima_seg, ima_pre);
+   
+   frame_objects;
     
    break;
-   cur_frame = cur_frame + 1
+   cur_frame = cur_frame + 1;
 end

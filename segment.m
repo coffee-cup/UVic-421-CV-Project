@@ -1,4 +1,4 @@
-function [ ima_out ] = segment( ima_in )
+function [ CC_mask ] = segment( ima_in )
 %PROCESS Segments pods using active contours
 %   Detailed explanation goes here
     
@@ -41,16 +41,20 @@ function [ ima_out ] = segment( ima_in )
 
 %     figure; imshow(seg); title('Global Region-Based Segmentation');
     
+    % Apply simple threshold to remove small noise or random specs
     threshValue = graythresh(ima_in);
     I = ima_in < (255 * threshValue);
-    figure; imshow(I); title(sprintf('Image thresholded at %d', threshValue))
+    figure; imshow(I); title(sprintf('Image thresholded at %d', threshValue*255))
     
-    CC = bwconncomp(I, 4);
-    [labeledImage, numberOfBlobs] = bwlabel(I);
-    measurments = regionprops(labeledImage);
-    contours = zeros(size(ima_in, 1), size(ima_in, 2));
+    %CC = bwconncomp(I, 4);
+    %[labeledImage, numberOfBlobs] = bwlabel(I);
+    %measurments = regionprops(labeledImage);
+    %contours = zeros(size(ima_in, 1), size(ima_in, 2));
 %     figure;
-    contours = activecontour(ima_in, imdilate(I, ones(3)), 200, 'Chan-Vese');
+
+    % Apply active contouring using built in Matlab function
+    contours = activecontour(ima_in, imdilate(I, ones(3)));
+    
 %     for blob=1:numberOfBlobs
 %         thisBlob = ismember(labeledImage, blob);
 % %         figure; imshow(thisBlob);
@@ -62,15 +66,15 @@ function [ ima_out ] = segment( ima_in )
     %figure; imshow(contours); title('CONTOURS!!!!!!!!!!!');
     
     %Identify Number of Copepods found
-    temp = bwconncomp(contours,4);
-    copepods = temp.NumObjects;
-    copepods
+    %temp = bwconncomp(contours,4);
+    %copepods = temp.NumObjects;
+    %copepods
     
     
 %     [labeledImage, numberOfBlobs] = bwlabel(temp)
     
-    figure; imshow(ima_in .* uint8(contours)); title('Mask Over Image');
-    ima_out = contours;
+    %figure; imshow(ima_in .* uint8(contours)); title('Mask Over Image');
+    CC_mask = contours;
 %     ima_out = seg;
 
 end
