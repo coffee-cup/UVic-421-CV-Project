@@ -27,9 +27,10 @@ while hasFrame(video)
    imshow(ima_seg);
    title('Image After Segmentation');
    
-   frame_objects = label(ima_seg, ima_pre);
+   [frame_objects, positions, count] = label(ima_seg, ima_pre);
    
    frame_objects;
+   positions(1:count,:)
     
    break;
    cur_frame = cur_frame + 1;
