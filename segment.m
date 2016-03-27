@@ -46,7 +46,7 @@ function [ CC_mask ] = segment( ima_in )
 
     % Apply simple threshold to remove small noise or random specs
     threshValue = graythresh(ima_edge);
-    I = ima_in < (255 * threshValue);
+    I = ima_edge < (255 * threshValue);
     figure; imshow(I); title(sprintf('Image thresholded at %d', threshValue*255))
     
     %CC = bwconncomp(I, 4);
