@@ -41,8 +41,11 @@ function [ CC_mask ] = segment( ima_in )
 
 %     figure; imshow(seg); title('Global Region-Based Segmentation');
     
+    % Dilate and Erode to get border image
+    ima_edge = EdgeImage(ima_in);
+
     % Apply simple threshold to remove small noise or random specs
-    threshValue = graythresh(ima_in);
+    threshValue = graythresh(ima_edge);
     I = ima_in < (255 * threshValue);
     figure; imshow(I); title(sprintf('Image thresholded at %d', threshValue*255))
     

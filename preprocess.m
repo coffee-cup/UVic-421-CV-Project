@@ -13,9 +13,7 @@ function [ ima_out ] = preprocess( ima_in )
     % Sharpen with unsharp mask
     ima_sharpen = imsharpen(ima_gray, 'Radius', 10, 'Amount', 3,'Threshold',0.1);
     
-    %Edge Image
-    ima_out = EdgeImage(ima_sharpen);
-    
+    ima_out = ima_sharpen;
     
 end
 
