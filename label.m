@@ -32,10 +32,10 @@ count = 1;
      %figure; imshow(thisBlob);title(sprintf('Blob: %d / %d', blob, numberOfBlobs));
      %disp(sprintf('Label %d / %d, Area: %d', blob, numberOfBlobs, area));
      
-     hold on;
+     %hold on;
      if area > 144
          % To big to be a copepod
-         plot(center(2), center(1), 'b*');
+         %plot(center(2), center(1), 'b*');
      else
         % Detected a copepod
         copepod = CreateCopepod(vals(1), center);
@@ -43,7 +43,7 @@ count = 1;
         % Add detected copepod object to objects array at label index
         objects(count) = copepod;
         positions(count, :, :) = [center(1), center(2), count];
-        plot(center(2), center(1), 'ro'); 
+        %plot(center(2), center(1), 'ro'); 
         count = count + 1;
      end
  end

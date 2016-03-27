@@ -11,7 +11,7 @@ function [ output_args ] = show_movement( I, objects, count )
         moved_locations = cur_copepod.locations(1:cur_copepod.num_locations,:);
         plot(moved_locations(:,2), moved_locations(:,1));
         plot(moved_locations(:,2), moved_locations(:,1), 'b.');
+        pause(0.001);
     end
-
 end
 

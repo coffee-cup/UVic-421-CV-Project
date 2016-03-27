@@ -21,9 +21,9 @@ while hasFrame(video)
    disp(sprintf('\nRead Frame %d', cur_frame));
 
    % NR
-   figure;
-   imshow(frame);
-   title(str);
+   %figure;
+   %imshow(frame);
+   %title(str);
   
    disp('Preprocessing...');
    
@@ -31,18 +31,18 @@ while hasFrame(video)
    ima_pre = preprocess(frame);
    
    % NR
-   figure;
-   imshow(ima_pre);
-   title('Image After Pre-Processing');
+   %figure;
+   %imshow(ima_pre);
+   %title('Image After Pre-Processing');
    
    disp('Segmenting...');
    % Segment the Pre-processed image using active contouring
    ima_seg = segment(ima_pre);
    
    % NR
-   figure;
-   imshow(ima_seg);
-   title('Image After Segmentation');
+   %figure;
+   %imshow(ima_seg);
+   %title('Image After Segmentation');
    
    disp('Labeling...');
    [frame_objects, frame_positions, frame_count] = label(ima_seg, ima_pre);
@@ -65,7 +65,7 @@ while hasFrame(video)
    end
    
    % Only process 4 frames right now
-   if cur_frame == 4
+   if cur_frame == 5
        break;
    end 
    
