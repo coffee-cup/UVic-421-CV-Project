@@ -9,7 +9,7 @@ function [ copepod ] = CreateCopepod( label,  init_position)
     % use max num of locations (may need to change)
     MAX_LOCATIONS = 10000;
 
-    copepod = struct('num_locations', 0, 'label', label, 'latest_pos', init_position, 'locations', zeros(MAX_LOCATIONS, 2), 'deltas', zeros(MAX_LOCATIONS, 2));
+    copepod = struct('num_locations', 0, 'label', label, 'latest_pos', init_position, 'locations', zeros(MAX_LOCATIONS, 2), 'deltas', zeros(MAX_LOCATIONS, 1));
     copepod;
     copepod.locations(copepod.num_locations+1, :) = init_position;
     copepod.num_locations = 1;

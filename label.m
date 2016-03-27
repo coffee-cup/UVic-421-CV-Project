@@ -41,7 +41,7 @@ count = 1;
         copepod = CreateCopepod(vals(1), center);
         
         % Add detected copepod object to objects array at label index
-        objects(vals(1)) = copepod;
+        objects(count) = copepod;
         positions(count, :, :) = [center(1), center(2), count];
         plot(center(2), center(1), 'ro'); 
         count = count + 1;
