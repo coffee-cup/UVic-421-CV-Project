@@ -3,13 +3,15 @@ function [ objects, positions, count ] = label( CC_mask, I )
 %segmentation. Does not track
 %   CC_mask: connected component mask after segmentation
 
+% Label all connected components
+[labeledImage, numberOfBlobs] = bwlabel(CC_mask);
+
 [r, c] = size(I);
-objects = repmat(CreateCopepod('empty', [0 0]), 10000, 1);
-positions = zeros(10000, 3);
+objects = repmat(CreateCopepod('empty', [0 0]), numberOfBlobs, 1);
+positions = zeros(numberOfBlobs, 3);
 m_label = bwlabel(CC_mask, 4); % label with 4 connectivity
 count = 1;
 
-[labeledImage, numberOfBlobs] = bwlabel(CC_mask);
 % Loop through all found labels
 % Compute label area create new region/copepod depending on size
  for blob=1:numberOfBlobs

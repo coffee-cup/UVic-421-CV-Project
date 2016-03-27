@@ -17,8 +17,8 @@ function [ tracked_objects, tracked_positions, tracked_count, unused_objects] = 
     %tracked_positions = global_positions;
     %tracked_count = global_count;
     
-    tracked_objects = repmat(CreateCopepod('empty', [0 0]), 10000, 1);
-    tracked_positions = zeros(10000, 3);
+    tracked_objects = repmat(CreateCopepod('empty', [0 0]), frame_count, 1);
+    tracked_positions = zeros(frame_count, 3);
     tracked_count = 1;
     
     % All of the copepods we have already tracked

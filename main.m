@@ -65,7 +65,7 @@ while hasFrame(video)
    end
    
    % How many frames to process
-   if cur_frame == 20
+   if cur_frame == 5
        break;
    end 
    
