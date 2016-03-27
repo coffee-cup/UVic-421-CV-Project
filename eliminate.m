@@ -14,7 +14,6 @@ function [ objects, count ] = eliminate( global_objects, global_count )
         moved_amount = sum(cur_copepod.deltas);
         if moved_amount > MOVE_THRESH
            objects(count) = cur_copepod;
-           positions(count,:,:) = global_positions(i,:,:);
            count = count + 1;
         end
     end
