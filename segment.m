@@ -56,7 +56,7 @@ function [ CC_mask ] = segment( ima_in )
 %     figure;
 
     % Apply active contouring using built in Matlab function
-    contours = activecontour(ima_in, imdilate(I, ones(3)));
+    contours = activecontour(ima_edge, imdilate(I, ones(3)));
     
 %     for blob=1:numberOfBlobs
 %         thisBlob = ismember(labeledImage, blob);
