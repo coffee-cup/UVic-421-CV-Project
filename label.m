@@ -7,9 +7,9 @@ function [ objects, positions, count ] = label( CC_mask, I )
 objects = repmat(CreateCopepod('empty', [0 0]), 10000, 1);
 positions = zeros(10000, 3);
 m_label = bwlabel(CC_mask, 4); % label with 4 connectivity
+count = 1;
 
 [labeledImage, numberOfBlobs] = bwlabel(CC_mask);
-count = numberOfBlobs;    
 % Loop through all found labels
 % Compute label area create new region/copepod depending on size
  for blob=1:numberOfBlobs
@@ -42,8 +42,9 @@ count = numberOfBlobs;
         
         % Add detected copepod object to objects array at label index
         objects(vals(1)) = copepod;
-        positions(blob, :, :) = [center(1), center(2), vals(1)];
+        positions(count, :, :) = [center(1), center(2), count];
         plot(center(2), center(1), 'ro'); 
+        count = count + 1;
      end
  end
 

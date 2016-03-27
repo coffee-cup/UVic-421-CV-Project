@@ -5,7 +5,7 @@ function [ ima_out ] = preprocess( ima_in )
     [r, c, s] = size(ima_in);
     
     % Crop image to remove black borders and timestamp
-    ima_crop = imcrop(ima_in, [10 10 c-20 r-20]);
+    ima_crop = imcrop(ima_in, [20 20 c-40 r-40]);
     
     % Convert to 8 bit gray scale
     ima_gray = rgb2gray(ima_crop);

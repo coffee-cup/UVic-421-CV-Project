@@ -28,16 +28,19 @@ while hasFrame(video)
    title('Image After Segmentation');
    
    [frame_objects, frame_positions, frame_count] = label(ima_seg, ima_pre);
+   title(sprintf('Labeled copepods for Frame %d', cur_frame));
     
    % First frame, set global data as frame data
    if cur_frame == 1
-       global_objects = frame_objects;
-       global_positions = frame_positions;
-       global_count = frame_count;
+        global_objects = frame_objects;
+        global_positions = frame_positions;
+        global_count = frame_count;
    else
-       
+        [global_objects, global_positions, global_count] = track(global_objects, global_positions, global_count, frame_objects, frame_positions, frame_count, ima_seg);
    end
    
-   break;
+   if cur_frame == 2
+       break;
+   end
    cur_frame = cur_frame + 1;
 end
