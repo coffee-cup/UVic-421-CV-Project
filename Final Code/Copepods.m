@@ -25,8 +25,9 @@ function [ copepod_count ] = Copepods( videofile, number_of_frames )
         
        % Only show debug images for first frame
        if cur_frame == 1
-        figure; title(sprintf('Original Image | time: %f | frame: %d', video.CurrentTime, cur_frame));
+        figure;
         imshow(frame);
+        title(sprintf('Original Image | time: %f | frame: %d', video.CurrentTime, cur_frame));
        end
 
        disp('Preprocessing...');
@@ -35,7 +36,7 @@ function [ copepod_count ] = Copepods( videofile, number_of_frames )
        ima_pre = preprocess(frame);
 
        if cur_frame == 1
-           figure; title('Image After Pre-Processing'); imshow(ima_pre);
+           figure; imshow(ima_pre); title('Image After Pre-Processing');
        end
 
        disp('Segmenting...');
@@ -43,14 +44,14 @@ function [ copepod_count ] = Copepods( videofile, number_of_frames )
        ima_seg = segment(ima_pre); 
 
        if cur_frame == 1
-           figure; title('Image After Segmentation'); imshow(ima_seg);
+           figure; imshow(ima_seg); title('Image After Segmentation');
        end
 
        disp('Labeling...');
        [frame_objects, frame_positions, frame_count] = label(ima_seg, ima_pre);
        
        if cur_frame == 1
-          figure; title('Labeled Components'); imshow(ima_seg);
+          figure; imshow(ima_seg); title('Labeled Components');
           hold on;
           plot(frame_positions(1:frame_count-1,2,:) , frame_positions(1:frame_count-1,1,:), 'go');
        end
@@ -86,8 +87,9 @@ function [ copepod_count ] = Copepods( videofile, number_of_frames )
 
     disp('Showing Movement...');
     % Plot the movement of copepods over the frames
-    show_movement(ima_seg, final_objects, final_count);
+    show_movement(frame, final_objects, final_count);
     
+    disp(sprintf('Over %d frames there are %d copepods', number_of_frames, final_count));
     copepod_count = final_count;
 
 end

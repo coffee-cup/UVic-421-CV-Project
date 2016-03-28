@@ -44,12 +44,11 @@ function [ tracked_objects, tracked_positions, tracked_count, unused_objects] = 
        cur_pos = frame_positions(i, :, :);
        frame_copepod = frame_objects(cur_pos(3));
        
-       title(sprintf('Looking at copepod %d / %d', i, frame_count-1));
-       
        % Plot the bounds to look in
-       hold on;
-       pat = patch([cur_pos(2)-LEFT cur_pos(2)-LEFT cur_pos(2)+RIGHT cur_pos(2)+RIGHT], [cur_pos(1)-TOP cur_pos(1)+BOTTOM cur_pos(1)+TOP cur_pos(1)-BOTTOM], 'r');
-       set(pat,'FaceAlpha', 0.2);
+       %hold on;
+       %title(sprintf('Looking at copepod %d / %d', i, frame_count-1));
+       %pat = patch([cur_pos(2)-LEFT cur_pos(2)-LEFT cur_pos(2)+RIGHT cur_pos(2)+RIGHT], [cur_pos(1)-TOP cur_pos(1)+BOTTOM cur_pos(1)+TOP cur_pos(1)-BOTTOM], 'r');
+       %set(pat,'FaceAlpha', 0.2);
        
        % Only compare to copepods in area around copepod we are looking at
        nearest_y = global_positions(:,1,:) > max(0,(cur_pos(1) - TOP)) & global_positions(:,1,:) < (cur_pos(1) + BOTTOM);
@@ -57,6 +56,7 @@ function [ tracked_objects, tracked_positions, tracked_count, unused_objects] = 
        nearest = nearest_y & nearest_x & taken_positions;
        
       % Plot the current object we are looking at
+      %figure; imshow(I);
       %hold on;
       %plot(cur_pos(2) ,cur_pos(1), 'g.');
        
