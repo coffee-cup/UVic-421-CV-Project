@@ -3,7 +3,7 @@
 *           CENG 421 Final Project            *
 *              Copepod Tracking               *
 *                 Jake Runzer                 *
-*	           Doug Ball                  *
+*	               Doug Ball                  *
 *                                             *
 ***********************************************
 
@@ -18,3 +18,9 @@ values in the main script or run the 'Copepods' function manually.
 The function definition of Copepods is
 
 	function [ copepod_count ] = Copepods( videofile, number_of_frames )
+
+Time to run:
+
+Processing of the frames can take a while to run, especially the segmentating and tracking.
+
+To process 4 frames of video, it takes about 15-30 seconds per frame. 
