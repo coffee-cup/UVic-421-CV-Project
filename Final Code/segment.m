@@ -1,6 +1,5 @@
 function [ CC_mask ] = segment( ima_in )
-%PROCESS Segments pods using active contours
-%   Detailed explanation goes here
+%PROCESS Segments pods using active contours on the edge image
     
     % Dilate and Erode to get border image
     ima_edge = EdgeImage(ima_in);
@@ -11,7 +10,6 @@ function [ CC_mask ] = segment( ima_in )
      
     % Apply active contouring using built in Matlab function
     contours = activecontour(ima_edge, imdilate(ima_thresh, ones(5)));
-    %seg = region_seg(ima_edge, imdilate(ima_thresh, ones(7)), 200);
     
     CC_mask = contours;
 

@@ -1,5 +1,6 @@
 function [ E ] = EdgeImage( I )
 %EDGEIMAGE Creates edge image by applying dilate and erode
+% EdgeImage = dilated - eroded
 
 se = strel('square', 3);
 I2 = imdilate(I, se);
