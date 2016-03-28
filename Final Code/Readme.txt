@@ -3,7 +3,7 @@
 *           CENG 421 Final Project            *
 *              Copepod Tracking               *
 *                 Jake Runzer                 *
-*	               Doug Ball                  *
+*	           Doug Ball                  *
 *                                             *
 ***********************************************
 
