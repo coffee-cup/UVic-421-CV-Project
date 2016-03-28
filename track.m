@@ -6,9 +6,9 @@ function [ tracked_objects, tracked_positions, tracked_count, unused_objects] = 
     RADIUS = 40;
     
     % Bounds to look for matching copepod
-    LEFT = 50;
+    LEFT = 100;
     RIGHT = 5;
-    TOP = 15;
+    TOP = 10;
     BOTTOM = TOP;
     
     disp(sprintf('There are %d global copepods and %d frame copepods', global_count, frame_count));
@@ -28,10 +28,11 @@ function [ tracked_objects, tracked_positions, tracked_count, unused_objects] = 
     figure(1);
     imshow(I);
     
+    pause(5);
     % Plot all global positions (last frames)
     hold on;
     plot(global_positions(:,2,:), global_positions(:,1,:), 'y.');
-    
+    pause(5);
     for i=1:frame_count-1
        cur_pos = frame_positions(i, :, :);
        frame_copepod = frame_objects(cur_pos(3));
@@ -99,7 +100,6 @@ function [ tracked_objects, tracked_positions, tracked_count, unused_objects] = 
            plot(matched_position(:,2,:), matched_position(:,1,:), 'r.');
        end
       tracked_count = tracked_count + 1;
-      %pause(0.0001);
     end
     
     taken_positions = taken_positions(1:global_count-1);

@@ -12,6 +12,9 @@ positions = zeros(numberOfBlobs, 3);
 m_label = bwlabel(CC_mask, 4); % label with 4 connectivity
 count = 1;
 
+%figure; imshow(CC_mask);
+%hold on;
+
 % Loop through all found labels
 % Compute label area create new region/copepod depending on size
  for blob=1:numberOfBlobs
@@ -32,21 +35,21 @@ count = 1;
      center = [round(sum_r / area) round(sum_c / area)];
      
      %figure; imshow(thisBlob);title(sprintf('Blob: %d / %d', blob, numberOfBlobs));
-     %disp(sprintf('Label %d / %d, Area: %d', blob, numberOfBlobs, area));
+     disp(sprintf('Label %d / %d, Area: %d', blob, numberOfBlobs, area));
      
      %hold on;
-     if area > 144
-         % To big to be a copepod
-         %plot(center(2), center(1), 'b*');
-     else
+     if area < 200
         % Detected a copepod
         copepod = CreateCopepod(vals(1), center);
         
         % Add detected copepod object to objects array at label index
         objects(count) = copepod;
         positions(count, :, :) = [center(1), center(2), count];
-        %plot(center(2), center(1), 'ro'); 
+        %plot(center(2), center(1), 'go'); 
         count = count + 1;
+     else
+        % Not a copepod
+        %plot(center(2), center(1), 'r*');
      end
  end
 

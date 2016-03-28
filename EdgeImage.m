@@ -7,7 +7,7 @@ I3 = imerode(I, se);
 
 I4 = I2 - I3;
 
-E = 255 - I4;
+E = I4;
 
 end
 

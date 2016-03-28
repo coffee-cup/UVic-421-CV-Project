@@ -3,8 +3,8 @@ function [ output_args ] = show_movement( I, objects, count )
 %   Detailed explanation goes here
 
     black = zeros(size(I));
-    figure; title('Final copepods');
-    imshow(black);
+    %figure; title('Final copepods');
+    %imshow(black);
     hold on;
     for i=1:count
         cur_copepod = objects(i);
