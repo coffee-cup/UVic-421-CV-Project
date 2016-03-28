@@ -87,6 +87,8 @@ function [ copepod_count ] = Copepods( videofile, number_of_frames )
     disp('Showing Movement...');
     % Plot the movement of copepods over the frames
     show_movement(ima_seg, final_objects, final_count);
+    
+    copepod_count = final_count;
 
 end
 
