@@ -19,5 +19,7 @@ The function definition of Copepods is
 
 	function [ copepod_count ] = Copepods( videofile, number_of_frames )
 	
-To run without errors a 64-bit codec that supports mp4 file formatting must be downloaded or previously present. 
-Because of this issue, the code was unable to run on the lab computers; it was however, able to run on both our mac and windows systems.
+To run without errors, a 64-bit codec that supports mp4 file formatting must be downloaded or previously present. 
+Because of this issue, the code was unable to run on the lab computers; it was however able to run on both our mac and windows systems.
+
+Only one video with an approapriate frame rate was provided to us by ONC. This video contains the multiple input images that were requested. 
